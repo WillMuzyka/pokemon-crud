@@ -1,0 +1,14 @@
+# vscode files
+.vscode/
+
+# project related
+node_modules/
+build/
+coverage/
+dist/
+
+# sensitive information
+.env
+
+# yarn
+yarn-error.log
