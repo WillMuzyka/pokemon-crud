@@ -19,4 +19,21 @@ usersRouter.post(
   usersController.create,
 );
 
+usersRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: Joi.object({
+      _id: Joi.string().required(),
+      nickname: Joi.string().required(),
+      email: Joi.string().email().required(),
+      old_password: Joi.string(),
+      password: Joi.string().min(6),
+      password_confirmation: Joi.ref('password'),
+    })
+      .with('password', 'password_confirmation')
+      .with('password', 'old_password'),
+  }),
+  usersController.update,
+);
+
 export default usersRouter;
