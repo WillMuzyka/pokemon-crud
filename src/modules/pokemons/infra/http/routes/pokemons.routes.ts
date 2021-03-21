@@ -21,4 +21,16 @@ pokemonsRouter.post(
   pokemonsController.create,
 );
 
+pokemonsRouter.put(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      pokemon_id: Joi.string().required(),
+      name: Joi.string().required(),
+      type: Joi.string().required(),
+    },
+  }),
+  pokemonsController.update,
+);
+
 export default pokemonsRouter;

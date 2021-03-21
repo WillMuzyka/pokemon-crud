@@ -25,7 +25,6 @@ usersRouter.put(
   ensureAuthenticated,
   celebrate({
     [Segments.BODY]: Joi.object({
-      _id: Joi.string().required(),
       nickname: Joi.string().required(),
       email: Joi.string().email().required(),
       old_password: Joi.string(),
