@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreatePokemonService from '@modules/pokemons/services/CreatePokemonService';
+import DeletePokemonService from '@modules/pokemons/services/DeletePokemonService';
 import ListPokemonService from '@modules/pokemons/services/ListPokemonService';
 import UpdatePokemonService from '@modules/pokemons/services/UpdatePokemonService';
 
@@ -15,6 +16,17 @@ export default class PokemonsController {
     return res.json({
       message: 'Pokemon created successfully',
       pokemon,
+    });
+  }
+
+  public async delete(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const deletePokemon = container.resolve(DeletePokemonService);
+    await deletePokemon.execute(id);
+
+    return res.json({
+      message: 'Pokemon deleted successfully',
     });
   }
 

@@ -6,7 +6,7 @@ import UpdatePokemonService from '../UpdatePokemonService';
 let fakePokemonsRepository: FakePokemonsRepository;
 let updatePokemon: UpdatePokemonService;
 
-describe('UpdateProfile', () => {
+describe('UpdatePokemon', () => {
   beforeEach(() => {
     fakePokemonsRepository = new FakePokemonsRepository();
 

@@ -10,6 +10,11 @@ const pokemonsController = new PokemonsController();
 
 pokemonsRouter.use(ensureAuthenticated);
 
+pokemonsRouter.get(
+  '/',
+  pokemonsController.list,
+);
+
 pokemonsRouter.post(
   '/',
   celebrate({
@@ -19,11 +24,6 @@ pokemonsRouter.post(
     },
   }),
   pokemonsController.create,
-);
-
-pokemonsRouter.get(
-  '/',
-  pokemonsController.list,
 );
 
 pokemonsRouter.put(
@@ -36,6 +36,16 @@ pokemonsRouter.put(
     },
   }),
   pokemonsController.update,
+);
+
+pokemonsRouter.delete(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  pokemonsController.delete,
 );
 
 export default pokemonsRouter;

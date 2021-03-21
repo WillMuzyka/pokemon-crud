@@ -17,6 +17,12 @@ export default class UsersRepository implements IPokemonsRepository {
     return newPokemon.toObject();
   }
 
+  public async delete(pokemon_id: string): Promise<void> {
+    PokemonModel.findByIdAndDelete(pokemon_id).catch((err) => {
+      throw new AppError(`Error finding and deleting pokemon: ${err}`);
+    });
+  }
+
   public async findAll(): Promise<IPokemon[]> {
     const pokemons = await PokemonModel.find().catch((err) => {
       throw new AppError(`Error finding all pokemons: ${err}`);

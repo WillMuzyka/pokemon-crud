@@ -1,4 +1,5 @@
-import { uuid } from 'uuidv4';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { v4 } from 'uuid';
 
 import IUser from '@modules/users/dtos/IUserDTO';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
@@ -13,7 +14,7 @@ class UsersRepository implements IUsersRepository {
     Object.assign(
       user,
       {
-        _id: uuid(),
+        _id: v4(),
         ...userData,
       },
     );

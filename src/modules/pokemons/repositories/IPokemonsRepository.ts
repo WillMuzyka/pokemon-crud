@@ -4,7 +4,7 @@ import ICreatePokemonDTO from '@modules/pokemons/dtos/ICreatePokemonDTO';
 
 interface IUsersRepository {
   create(user: ICreatePokemonDTO): Promise<IPokemonDTO>;
-  // delete(id: string): Promise<void>;
+  delete(pokemon_id: string): Promise<void>;
   findAll(): Promise<IPokemonDTO[]>;
   findById(id: string): Promise<IPokemonDTO | undefined>;
   findByName(name: string): Promise<IPokemonDTO | undefined>;

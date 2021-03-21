@@ -6,7 +6,7 @@ import CreatePokemonService from '../CreatePokemonService';
 let fakepokemonsRepository: FakepokemonsRepository;
 let createPokemon: CreatePokemonService;
 
-describe('Createpokemon', () => {
+describe('CreatePokemon', () => {
   beforeEach(() => {
     fakepokemonsRepository = new FakepokemonsRepository();
 

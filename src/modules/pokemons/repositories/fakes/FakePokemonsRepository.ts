@@ -1,4 +1,5 @@
-import { uuid } from 'uuidv4';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { v4 } from 'uuid';
 
 import IPokemon from '@modules/pokemons/dtos/IPokemonDTO';
 import ICreatePokemonDTO from '@modules/pokemons/dtos/ICreatePokemonDTO';
@@ -13,13 +14,17 @@ class PokemonsRepository implements IPokemonsRepository {
     Object.assign(
       pokemon,
       {
-        _id: uuid(),
+        _id: v4(),
         ...pokemonData,
       },
     );
 
     this.pokemons.push(pokemon);
     return pokemon;
+  }
+
+  public async delete(pokemon_id: string): Promise<void> {
+    this.pokemons = this.pokemons.filter((pokemon) => JSON.stringify(pokemon._id) !== pokemon_id);
   }
 
   public async findAll(): Promise<IPokemon[]> {
