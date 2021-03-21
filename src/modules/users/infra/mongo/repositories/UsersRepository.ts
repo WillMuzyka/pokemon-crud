@@ -6,15 +6,13 @@ import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUser from '@modules/users/dtos/IUserDTO';
 import UserModel from '../schemas/User';
 
-type IUserModel = IUser & typeof UserModel;
-
 export default class UsersRepository implements IUsersRepository {
   public async create(userData: ICreateUserDTO): Promise<IUser> {
     const newUser = await UserModel.create({
       ...userData,
       _id: mongoose.Types.ObjectId(),
     }).catch((err) => {
-      throw new AppError(`Error finding user: ${err}`);
+      throw new AppError(`Error creating user: ${err}`);
     });
     return newUser.toObject();
   }
@@ -33,7 +31,7 @@ export default class UsersRepository implements IUsersRepository {
     return user === null ? undefined : user.toObject();
   }
 
-  public async save(userData: IUserModel): Promise<IUser> {
+  public async save(userData: IUser): Promise<IUser> {
     const { email, nickname, password } = userData;
     const user = await UserModel.findOneAndUpdate(
       { _id: userData._id },
@@ -42,7 +40,9 @@ export default class UsersRepository implements IUsersRepository {
         email,
         password,
       },
-    );
+    ).catch((err) => {
+      throw new AppError(`Error finding user by ID and updating: ${err}`);
+    });
 
     if (user === null) throw new AppError('User ID not present on DB');
     return {
