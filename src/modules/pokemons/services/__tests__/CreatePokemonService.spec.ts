@@ -1,7 +1,7 @@
 import AppError from '@shared/errors/AppError';
 
-import FakepokemonsRepository from '../repositories/fakes/FakePokemonsRepository';
-import CreatePokemonService from './CreatePokemonService';
+import FakepokemonsRepository from '@modules/pokemons/repositories/fakes/FakePokemonsRepository';
+import CreatePokemonService from '../CreatePokemonService';
 
 let fakepokemonsRepository: FakepokemonsRepository;
 let createPokemon: CreatePokemonService;
