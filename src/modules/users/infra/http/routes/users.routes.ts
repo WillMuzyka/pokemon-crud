@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { celebrate, Joi, Segments } from 'celebrate';
 
 import UsersController from '../controllers/UsersController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
 
@@ -21,6 +22,7 @@ usersRouter.post(
 
 usersRouter.put(
   '/',
+  ensureAuthenticated,
   celebrate({
     [Segments.BODY]: Joi.object({
       _id: Joi.string().required(),
