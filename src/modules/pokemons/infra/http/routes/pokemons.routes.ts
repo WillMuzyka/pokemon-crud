@@ -21,6 +21,11 @@ pokemonsRouter.post(
   pokemonsController.create,
 );
 
+pokemonsRouter.get(
+  '/',
+  pokemonsController.list,
+);
+
 pokemonsRouter.put(
   '/',
   celebrate({

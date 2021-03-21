@@ -7,7 +7,7 @@ import IPokemon from '@modules/pokemons/dtos/IPokemonDTO';
 import IPokemonsRepository from '@modules/pokemons/repositories/IPokemonsRepository';
 
 @injectable()
-export default class CreateUserService {
+export default class CreatePokemonService {
   constructor(
     @inject('PokemonsRepository')
     private pokemonsRepository: IPokemonsRepository,

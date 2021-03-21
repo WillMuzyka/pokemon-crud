@@ -22,6 +22,10 @@ class PokemonsRepository implements IPokemonsRepository {
     return pokemon;
   }
 
+  public async findAll(): Promise<IPokemon[]> {
+    return this.pokemons;
+  }
+
   public async findById(id: string): Promise<IPokemon | undefined> {
     const findPokemon = this.pokemons.find((pokemon) => JSON.stringify(pokemon._id) === id);
 

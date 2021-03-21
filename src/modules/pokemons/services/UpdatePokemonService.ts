@@ -12,7 +12,7 @@ interface IRequest {
 }
 
 @injectable()
-export default class UpdateUserService {
+export default class UpdatePokemonService {
   constructor(
     @inject('PokemonsRepository')
     private pokemonsRepository: IPokemonsRepository,

@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 import CreatePokemonService from '@modules/pokemons/services/CreatePokemonService';
+import ListPokemonService from '@modules/pokemons/services/ListPokemonService';
 import UpdatePokemonService from '@modules/pokemons/services/UpdatePokemonService';
 
 export default class PokemonsController {
@@ -14,6 +15,16 @@ export default class PokemonsController {
     return res.json({
       message: 'Pokemon created successfully',
       pokemon,
+    });
+  }
+
+  public async list(req: Request, res: Response): Promise<Response> {
+    const listPokemon = container.resolve(ListPokemonService);
+    const pokemons = await listPokemon.execute();
+
+    return res.json({
+      message: 'Pokemons retrieved successfully',
+      pokemons,
     });
   }
 
