@@ -9,7 +9,7 @@ import mongoose from 'mongoose';
 
 import '@shared/container';
 import AppError from '@shared/errors/AppError';
-import routes from '@modules/users/infra/http/routes/users.routes';
+import routes from './routes';
 
 const app = express();
 

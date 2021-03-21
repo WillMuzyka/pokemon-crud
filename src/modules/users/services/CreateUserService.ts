@@ -17,7 +17,7 @@ export default class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  async execute({ nickname, email, password }: IUser): Promise<IUser> {
+  async execute({ nickname, email, password }: Omit<IUser, '_id'>): Promise<IUser> {
     const checkUserExists = await this.usersRepository.findByEmail(email);
     if (checkUserExists) {
       throw new AppError('Email address already used.');
@@ -29,7 +29,6 @@ export default class CreateUserService {
       email,
       password: hashedPassword,
     });
-
     return user;
   }
 }

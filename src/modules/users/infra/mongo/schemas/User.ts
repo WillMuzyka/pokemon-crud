@@ -1,9 +1,13 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import IUser from '@modules/users/dtos/IUserDTO';
 
-export interface IUserDocument extends Document, IUser {}
+type IUserDocument = IUser & Document
 
 const UserSchema = new Schema({
+  _id: {
+    type: mongoose.Types.ObjectId,
+    required: true,
+  },
   nickname: {
     type: String,
     required: true,
