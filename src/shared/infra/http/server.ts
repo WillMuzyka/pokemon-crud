@@ -16,12 +16,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const DB_SRV = process.env.DB_SRV || '';
+if (process.env.DB_SRV) {
+  const { DB_SRV } = process.env;
 
-mongoose.connect(DB_SRV);
-const db = mongoose.connection;
-// eslint-disable-next-line no-console
-db.on('error', console.error.bind(console, 'MongoDB connection error'));
+  mongoose.connect(DB_SRV);
+  const db = mongoose.connection;
+  // eslint-disable-next-line no-console
+  db.on('error', console.error.bind(console, 'MongoDB connection error'));
+}
 
 app.use(routes);
 app.use(errors());

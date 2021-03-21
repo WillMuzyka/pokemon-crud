@@ -38,7 +38,7 @@ export default class PokemonsController {
     const pokemon = await getPokemon.execute(id);
 
     return res.json({
-      message: 'Pokemon deleted successfully',
+      message: 'Pokemon retrieved successfully',
       pokemon,
     });
   }
