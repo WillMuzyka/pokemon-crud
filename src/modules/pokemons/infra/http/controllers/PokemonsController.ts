@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 
 import CreatePokemonService from '@modules/pokemons/services/CreatePokemonService';
 import DeletePokemonService from '@modules/pokemons/services/DeletePokemonService';
+import GetPokemonService from '@modules/pokemons/services/GetPokemonService';
 import ListPokemonService from '@modules/pokemons/services/ListPokemonService';
 import UpdatePokemonService from '@modules/pokemons/services/UpdatePokemonService';
 
@@ -27,6 +28,18 @@ export default class PokemonsController {
 
     return res.json({
       message: 'Pokemon deleted successfully',
+    });
+  }
+
+  public async get(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+
+    const getPokemon = container.resolve(GetPokemonService);
+    const pokemon = await getPokemon.execute(id);
+
+    return res.json({
+      message: 'Pokemon deleted successfully',
+      pokemon,
     });
   }
 

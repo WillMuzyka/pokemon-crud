@@ -11,6 +11,16 @@ const pokemonsController = new PokemonsController();
 pokemonsRouter.use(ensureAuthenticated);
 
 pokemonsRouter.get(
+  '/:id',
+  celebrate({
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
+    },
+  }),
+  pokemonsController.get,
+);
+
+pokemonsRouter.get(
   '/',
   pokemonsController.list,
 );

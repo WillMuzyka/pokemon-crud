@@ -9,7 +9,6 @@ interface IUsersRepository {
   findById(id: string): Promise<IPokemonDTO | undefined>;
   findByName(name: string): Promise<IPokemonDTO | undefined>;
   save(userData: IPokemonDTO): Promise<IPokemonDTO>;
-  // show(id: string): Promise<IPokemonDTO | undefined>;
 }
 
 export default IUsersRepository;
