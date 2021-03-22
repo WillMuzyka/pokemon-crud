@@ -529,6 +529,119 @@
               }
             }
           },
+          "400": {
+            "description": "Invalid ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Error finding pokemon by ID",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref":"#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pokemons"
+        ],
+        "summary": "Update a pokemon",
+        "description": "Update a pokemon name and/or type",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            },
+            "description": "The pokemon ID"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Raichu",
+                  "type": "eletric"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pokemon updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Pokemon",
+                  "example": {
+                    "message": "Pokemon updated successfully",
+                    "pokemon": {
+                      "name": "Raichu",
+                      "type": "electric",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Name already registered OR Name/Type missing OR Invalid ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Name already being used by other pokemon",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          },
           "401": {
             "$ref":"#/components/responses/Unauthorized"
           }
@@ -566,6 +679,28 @@
                   "$ref":"#/components/schemas/Pokemon",
                   "example": {
                     "message": "Pokemon deleted successfully"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Error finding pokemon by ID",
+                    "status": "error"
                   }
                 }
               }

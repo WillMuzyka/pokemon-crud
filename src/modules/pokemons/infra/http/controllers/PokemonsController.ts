@@ -54,8 +54,9 @@ export default class PokemonsController {
   }
 
   public async update(req: Request, res: Response): Promise<Response> {
+    const { id: pokemon_id } = req.params;
     const {
-      name, type, pokemon_id,
+      name, type,
     } = req.body;
 
     const updatePokemon = container.resolve(UpdatePokemonService);

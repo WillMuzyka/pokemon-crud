@@ -37,12 +37,14 @@ pokemonsRouter.post(
 );
 
 pokemonsRouter.put(
-  '/',
+  '/:id',
   celebrate({
     [Segments.BODY]: {
-      pokemon_id: Joi.string().required(),
       name: Joi.string().required(),
       type: Joi.string().required(),
+    },
+    [Segments.PARAMS]: {
+      id: Joi.string().required(),
     },
   }),
   pokemonsController.update,
