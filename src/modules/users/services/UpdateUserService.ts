@@ -37,7 +37,7 @@ export default class UpdateUserService {
     const userWithSameEmail = await this.usersRepository.findByEmail(email);
     const sameUser = JSON.stringify(userWithSameEmail?._id) === JSON.stringify(user._id);
     if (userWithSameEmail && !sameUser) {
-      throw new AppError('Email already being used by other user');
+      throw new AppError('Email address already used');
     }
 
     user.nickname = nickname;

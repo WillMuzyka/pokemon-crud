@@ -12,7 +12,7 @@ export default class UsersController {
     const newUser = await createUser.execute({ nickname, email, password });
     const { password: _, ...user } = newUser;
 
-    return res.json({
+    return res.status(201).json({
       message: 'User created successfully',
       user,
     });
@@ -35,6 +35,9 @@ export default class UsersController {
 
     const { password: _, ...user } = updatedUser;
 
-    return res.json(user);
+    return res.json({
+      message: 'User updated successfully',
+      user,
+    });
   }
 }

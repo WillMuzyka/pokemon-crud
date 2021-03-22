@@ -16,7 +16,7 @@ export default class CreatePokemonService {
   async execute({ name, type }: Omit<IPokemon, '_id'>): Promise<IPokemon> {
     const checkPokemonExists = await this.pokemonsRepository.findByName(name);
     if (checkPokemonExists) {
-      throw new AppError('Pokemon name already used.');
+      throw new AppError('Pokemon name already used');
     }
 
     const pokemon = await this.pokemonsRepository.create({

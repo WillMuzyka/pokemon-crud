@@ -15,6 +15,10 @@ export default class SessionsController {
 
     const { password: _, ...returnUser } = user;
 
-    return res.json({ user: returnUser, token });
+    return res.status(201).json({
+      message: 'Token created successfully',
+      user: returnUser,
+      token,
+    });
   }
 }

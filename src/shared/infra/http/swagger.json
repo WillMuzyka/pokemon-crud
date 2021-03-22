@@ -1,0 +1,666 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PokedexBRQ Documentation",
+    "description": "This is an API for Pokemon Masters",
+    "version": "1.0.0",
+    "contact": {
+      "email": "nomail@sorry.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a user",
+        "description": "Create a new user using email, nickname and password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nickname": "John Doe",
+                  "email": "john@doe.com",
+                  "password": "securePassword123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User",
+                  "example": {
+                    "message": "User created successfully",
+                    "user": {
+                      "nickname": "John Doe",
+                      "email": "john@doe.com",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email already registered OR Email/Nickname/Password missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Email address already used",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a user",
+        "description": "Update a user email, nickname and/or password",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nickname": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "old_password": {
+                    "type": "string",
+                    "required": false
+                  },
+                  "password": {
+                    "type": "string",
+                    "required": false
+                  },
+                  "password_confirmation": {
+                    "type": "string",
+                    "required": false
+                  }
+                },
+                "example": {
+                  "nickname": "John Doe",
+                  "email": "john@doe.com",
+                  "old_password": "securePassword123",
+                  "password": "newPass",
+                  "password_confirmation": "newPass"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User",
+                  "example": {
+                    "message": "User updated successfully",
+                    "user": {
+                      "nickname": "John Doe",
+                      "email": "john@doe.com",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Email already registered OR Email/Nickname/Password missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Email address already used",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/sessions": {
+      "post": {
+        "tags": [
+          "Sessions"
+        ],
+        "summary": "Create a user session",
+        "description": "Create a new sessions for a user using email and password",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "john@doe.com",
+                  "password": "securePassword123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Token created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "nickname": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "_id": {
+                          "type": "string"
+                        },
+                        "__v": {
+                          "type": "number"
+                        }
+                      }
+                    },
+                    "token": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Token created successfully",
+                    "user": {
+                      "nickname": "John Doe",
+                      "email": "john@doe.com",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    },
+                    "token": "ey...MU (JWT token)"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid email and/or password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Incorrect email/password combination.",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pokemons": {
+      "post": {
+        "tags": [
+          "Pokemons"
+        ],
+        "summary": "Create a pokemon",
+        "description": "Create a new pokemon using name and type",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Pikachu",
+                  "type": "electric"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Pokemon created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Pokemon",
+                  "example": {
+                    "message": "Pokemon created successfully",
+                    "pokemon": {
+                      "name": "Pikachu",
+                      "type": "electric",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Pokemon name already used",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Pokemon name already used",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pokemons"
+        ],
+        "summary": "Update a pokemon",
+        "description": "Update a pokemon name and/or type",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "Raichu",
+                  "type": "eletric"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Pokemon updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Pokemon",
+                  "example": {
+                    "message": "Pokemon updated successfully",
+                    "pokemon": {
+                      "name": "Raichu",
+                      "type": "electric",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Name already registered OR Name/Type missing",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                    "message": "Name already being used by other pokemon",
+                    "status": "error"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref":"#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Pokemons"
+        ],
+        "summary": "Get all pokemons",
+        "description": "Get a list with all pokemons registered on the database",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pokemons retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref":"#/components/schemas/Pokemon"
+                  },
+                  "example": {
+                    "message": "Pokemons retrieved successfully",
+                    "pokemons":[
+                      {
+                        "name": "Pikachu",
+                        "type": "electric",
+                        "_id": "6057daabf5bca9d70b398bfb",
+                        "__v": 0
+                      },
+                      {
+                        "name": "Raichu",
+                        "type": "electric",
+                        "_id": "6057d560ec4ee4c7d5655ed9",
+                        "__v": 0
+                      }
+                    ] 
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref":"#/components/responses/Unauthorized"
+          }
+        }
+      }
+    },
+    "/pokemons/{id}": {
+      "get": {
+        "tags": [
+          "Pokemons"
+        ],
+        "summary": "Get a pokemon",
+        "description": "Get a pokemon details by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            },
+            "description": "The pokemon ID"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pokemon retrived successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Pokemon",
+                  "example": {
+                    "message": "Pokemon retrieved successfully",
+                    "pokemon": {
+                      "name": "Pikachu",
+                      "type": "electric",
+                      "_id": "6057daabf5bca9d70b398bfb",
+                      "__v": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref":"#/components/responses/Unauthorized"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Pokemons"
+        ],
+        "summary": "Delete a pokemon",
+        "description": "Delete a pokemon from database by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minimum": 1
+            },
+            "description": "The pokemon ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Pokemon deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref":"#/components/schemas/Pokemon",
+                  "example": {
+                    "message": "Pokemon deleted successfully"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref":"#/components/responses/Unauthorized"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Invalid JWT",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "JWT token is missing",
+                "status": "error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "nickname": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      },
+      "Pokemon": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "pokemon": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "_id": {
+                "type": "string"
+              },
+              "__v": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

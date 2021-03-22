@@ -16,11 +16,12 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true
   },
   "exclude":[
     "jest.config.js",
-    "prettier.config.js",
+    "jest.setup.js",
     "babel.config.js",
     "node_modules",
     "coverage",

@@ -14,7 +14,7 @@ export default class PokemonsController {
     const createPokemon = container.resolve(CreatePokemonService);
     const pokemon = await createPokemon.execute({ name, type });
 
-    return res.json({
+    return res.status(201).json({
       message: 'Pokemon created successfully',
       pokemon,
     });
@@ -65,6 +65,9 @@ export default class PokemonsController {
       type,
     });
 
-    return res.json(updatedPokemon);
+    return res.json({
+      message: 'Pokemon updated successfully',
+      updatedPokemon,
+    });
   }
 }

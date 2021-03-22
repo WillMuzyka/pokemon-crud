@@ -6,15 +6,18 @@ import cors from 'cors';
 import express, { Request, Response, NextFunction } from 'express';
 import 'express-async-errors';
 import mongoose from 'mongoose';
+import swaggerUi from 'swagger-ui-express';
 
 import '@shared/container';
 import AppError from '@shared/errors/AppError';
 import routes from './routes';
+import swaggerFile from './swagger.json';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 if (process.env.DB_SRV) {
   const { DB_SRV } = process.env;
