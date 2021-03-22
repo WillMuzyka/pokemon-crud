@@ -114,8 +114,6 @@ Please notice that this project was made to evaluate my knowledge on the concept
 
 This is not a deploy version of the application and may not be optimized. The whole purpose of this code is for my own evaluation and I do not have any guaranty if you want to deploy or use it commercially.
 
-Observation: One point that can be improved in this code is the fact that it does not check for extra field on Pipedrive. A variable could be added to .env file to enable or not the verification requirement of these fields.
-
 ## :memo: LICENSE
 
 This project is under the MIT License. For more information, please refer to [LICENSE](LICENSE).
