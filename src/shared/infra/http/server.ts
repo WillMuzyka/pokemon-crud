@@ -26,7 +26,14 @@ if (process.env.MONGO_DB_ACTIVE) {
   const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
   const DB_SRV = `mongodb://${user}:${password}@${address}:${port}`;
 
-  mongoose.connect(DB_SRV);
+  const options = {
+    useNewUrlParser: true,
+    reconnectInterval: 500,
+  };
+
+  mongoose.connect(DB_SRV, options);
+  const db = mongoose.connection;
+  db.on('error', process.exit(1));
 }
 
 app.use(routes);
