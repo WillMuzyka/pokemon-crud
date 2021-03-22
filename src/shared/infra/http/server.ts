@@ -19,13 +19,14 @@ app.use(cors());
 app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
-if (process.env.DB_SRV) {
-  const { DB_SRV } = process.env;
+if (process.env.MONGO_DB_ACTIVE) {
+  const port = process.env.MONGO_PORT;
+  const address = process.env.MONGO_ADDR;
+  const user = process.env.MONGO_INITDB_ROOT_USERNAME;
+  const password = process.env.MONGO_INITDB_ROOT_PASSWORD;
+  const DB_SRV = `mongodb://${user}:${password}@${address}:${port}`;
 
   mongoose.connect(DB_SRV);
-  const db = mongoose.connection;
-  // eslint-disable-next-line no-console
-  db.on('error', console.error.bind(console, 'MongoDB connection error'));
 }
 
 app.use(routes);

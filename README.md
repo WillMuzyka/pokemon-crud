@@ -64,7 +64,13 @@ The whole project was made based on Node.js and docker. If you want to use this 
 This project has a .env file that contains all the environment variables. They are required and should not be left with empty values. The list of all variables can be found bellow.
 
 * **APP_SECRET**: The secret for the application JWT (Json Web Token) generation.
-* **DB_SRV**: The SRV for mongo database. It should be similar to `mongodb://user:password@localhost:port`
+* **MONGO_DB_ACTIVE**: Variable to enable or not MongoDB. Currently PostgreSQL is not configured, so keep this always true
+* **MONGO_ADDR**: The hostname for mongo database. If using docker, this variable will be automatically set for the mongo container name.
+* **MONGO_PORT**: The port for mongo database.
+* **MONGO_DB_NAME**: The name for mongo database.
+* **MONGO_DB_NAME**: The name for mongo database.
+* **MONGO_INITDB_ROOT_USERNAME**: The initial value of root username for mongo database.
+* **MONGO_INITDB_ROOT_PASSWORD**: The initial value of root password for mongo database.
 
 ## :whale2: Docker
 

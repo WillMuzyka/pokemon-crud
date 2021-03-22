@@ -25,6 +25,7 @@
     "babel.config.js",
     "node_modules",
     "coverage",
-    "tmp"
+    "tmp",
+    "dist"
   ]
 }
